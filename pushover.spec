@@ -1,6 +1,6 @@
 Name:           pushover
-Version:        0.0.2 
-Release:        2%{?dist}
+Version:        0.0.3
+Release:        1%{?dist}
 Summary:        Fun puzzle game with dominos
 
 Group:          Amusements/Games
@@ -17,6 +17,7 @@ BuildRequires:  libpng-devel
 BuildRequires:  zlib-devel
 BuildRequires:  lua-devel
 BuildRequires:  gettext
+BuildRequires:  ImageMagick
 BuildRequires:  desktop-file-utils
 Requires:       hicolor-icon-theme
 Requires:       gnu-free-sans-fonts
@@ -53,6 +54,14 @@ rm $RPM_BUILD_ROOT%{_datadir}/%{name}/data/FreeSans.ttf
 ln -s %{_datadir}/fonts/gnu-free/FreeSans.ttf \
     $RPM_BUILD_ROOT%{_datadir}/%{name}/data/FreeSans.ttf
 
+# Install icons (16, 32, 48, 64px)
+for i in 0 1 2 3; do
+  px=$(expr ${i} \* 16 + 16)
+  mkdir -p $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/${px}x${px}/apps
+  convert %{name}.ico[${i}] \
+    $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/${px}x${px}/apps/%{name}.png
+done
+
 # Install desktop file
 desktop-file-install \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications \
@@ -65,15 +74,35 @@ desktop-file-install \
 rm -rf $RPM_BUILD_ROOT
 
 
+%post
+touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
+
+
+%postun
+if [ $1 -eq 0 ] ; then
+    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+fi
+
+
+%posttrans
+gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+
+
 %files -f %{name}.lang
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
 %doc AUTHORS ChangeLog COPYING NEWS readme.txt
 
 
 %changelog
+* Mon May 30 2011 Andrea Musuruane <musuruan@gmail.com> 0.0.3-1
+- New upstream release
+- Packaged new desktop icons
+
 * Tue Jan 05 2010 Andrea Musuruane <musuruan@gmail.com> 0.0.2-2
 - Fixed license
 - Fixed typo
