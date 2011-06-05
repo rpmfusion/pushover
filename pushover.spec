@@ -1,6 +1,6 @@
 Name:           pushover
 Version:        0.0.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Fun puzzle game with dominos
 
 Group:          Amusements/Games
@@ -99,6 +99,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sun Jun 05 2011 Andrea Musuruane <musuruan@gmail.com> 0.0.3-2
+- Rebuilt
+
 * Mon May 30 2011 Andrea Musuruane <musuruan@gmail.com> 0.0.3-1
 - New upstream release
 - Packaged new desktop icons
