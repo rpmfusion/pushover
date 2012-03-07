@@ -1,6 +1,6 @@
 Name:           pushover
 Version:        0.0.3
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Fun puzzle game with dominos
 
 Group:          Amusements/Games
@@ -99,6 +99,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Thu Mar 08 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.0.3-4
+- Rebuilt for c++ ABI breakage
+
 * Thu Feb 09 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.0.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
