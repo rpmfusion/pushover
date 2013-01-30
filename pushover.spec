@@ -1,6 +1,6 @@
 Name:           pushover
-Version:        0.0.3
-Release:        4%{?dist}
+Version:        0.0.4
+Release:        1%{?dist}
 Summary:        Fun puzzle game with dominos
 
 Group:          Amusements/Games
@@ -25,7 +25,7 @@ Requires:       gnu-free-sans-fonts
 
 %description
 Rearrange the dominoes on the different platforms so that you can start a 
-chainreaction that makes all dominoes topple over.
+chain reaction that makes all dominoes topple over.
 
 
 %prep
@@ -95,10 +95,13 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
-%doc AUTHORS ChangeLog COPYING NEWS readme.txt
+%doc AUTHORS ChangeLog COPYING NEWS README
 
 
 %changelog
+* Sun Jan 27 2013 Andrea Musuruane <musuruan@gmail.com> 0.0.4-1
+- New upstream release
+
 * Thu Mar 08 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.0.3-4
 - Rebuilt for c++ ABI breakage
 
