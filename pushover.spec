@@ -1,15 +1,13 @@
 Name:           pushover
 Version:        0.0.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Fun puzzle game with dominos
 
-Group:          Amusements/Games
 # Some proprietary graphics from the original game are still used
 License:        GPLv3 and proprietary
 URL:            http://pushover.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Source1:        %{name}.desktop
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  SDL_mixer-devel
 BuildRequires:  SDL_ttf-devel
@@ -70,10 +68,6 @@ desktop-file-install \
 %find_lang %{name}
 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-
 %post
 touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
@@ -90,7 +84,6 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files -f %{name}.lang
-%defattr(-,root,root,-)
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
@@ -99,6 +92,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Mon Aug 12 2013 Andrea Musuruane <musuruan@gmail.com> 0.0.5-2
+- Dropped obsolete Group, Buildroot, %%clean and %%defattr
+
 * Mon May 20 2013 Andrea Musuruane <musuruan@gmail.com> 0.0.5-1
 - New upstream release
 
