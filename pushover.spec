@@ -1,6 +1,6 @@
 Name:           pushover
 Version:        0.0.5
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Fun puzzle game with dominos
 
 # Some proprietary graphics from the original game are still used
@@ -13,11 +13,7 @@ BuildRequires:  SDL_mixer-devel
 BuildRequires:  SDL_ttf-devel
 BuildRequires:  libpng-devel
 BuildRequires:  zlib-devel
-%if 0%{?fedora} >= 20
-BuildRequires:  compat-lua-devel
-%else
 BuildRequires:  lua-devel
-%endif
 BuildRequires:  gettext
 BuildRequires:  ImageMagick
 BuildRequires:  desktop-file-utils
@@ -95,6 +91,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Dec 31 2013 Andrea Musuruane <musuruan@gmail.com> 0.0.5-5
+- Pushover already supports lua-5.2
+
 * Tue Dec 31 2013 Andrea Musuruane <musuruan@gmail.com> 0.0.5-4
 - Dropped cleaning at the beginning of %%install
 
