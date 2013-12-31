@@ -1,6 +1,6 @@
 Name:           pushover
 Version:        0.0.5
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Fun puzzle game with dominos
 
 # Some proprietary graphics from the original game are still used
@@ -45,7 +45,6 @@ make %{?_smp_mflags}
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
 # Remove installed docs
@@ -96,6 +95,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Dec 31 2013 Andrea Musuruane <musuruan@gmail.com> 0.0.5-4
+- Dropped cleaning at the beginning of %%install
+
 * Tue Dec 31 2013 Andrea Musuruane <musuruan@gmail.com> 0.0.5-3
 - Built with compat-lua for F20+
 
