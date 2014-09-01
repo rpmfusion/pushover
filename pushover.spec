@@ -1,6 +1,6 @@
 Name:           pushover
 Version:        0.0.5
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Fun puzzle game with dominos
 
 # Some proprietary graphics from the original game are still used
@@ -91,6 +91,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Mon Sep 01 2014 Sérgio Basto <sergio@serjux.com> - 0.0.5-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Tue Dec 31 2013 Andrea Musuruane <musuruan@gmail.com> 0.0.5-5
 - Pushover already supports lua-5.2
 
