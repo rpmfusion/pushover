@@ -1,6 +1,6 @@
 Name:           pushover
 Version:        0.0.5
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Fun puzzle game with dominos
 
 # Some proprietary graphics from the original game are still used
@@ -91,6 +91,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sun Mar 26 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 0.0.5-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Mon Sep 01 2014 Sérgio Basto <sergio@serjux.com> - 0.0.5-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
