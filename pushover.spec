@@ -1,14 +1,16 @@
 Name:           pushover
 Version:        0.0.5
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        Fun puzzle game with dominos
 
 # Some proprietary graphics from the original game are still used
 License:        GPLv3 and proprietary
-URL:            http://pushover.sourceforge.net/
+URL:            https://pushover.github.io/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Source1:        %{name}.desktop
+Source2:        %{name}.appdata.xml
 
+BuildRequires:  gcc-c++
 BuildRequires:  SDL_mixer-devel
 BuildRequires:  SDL_ttf-devel
 BuildRequires:  libpng-devel
@@ -17,6 +19,7 @@ BuildRequires:  lua-devel
 BuildRequires:  gettext
 BuildRequires:  ImageMagick
 BuildRequires:  desktop-file-utils
+BuildRequires:  libappstream-glib
 Requires:       hicolor-icon-theme
 Requires:       gnu-free-sans-fonts
 
@@ -37,14 +40,11 @@ mv ChangeLog.utf8 ChangeLog
 
 %build
 %configure
-make %{?_smp_mflags}
+%make_build
 
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
-
-# Remove installed docs
-rm -rf $RPM_BUILD_ROOT%{_docdir}/%{name}/
+%make_install
 
 # Symlink system font
 rm $RPM_BUILD_ROOT%{_datadir}/%{name}/data/FreeSans.ttf
@@ -54,7 +54,7 @@ ln -s %{_datadir}/fonts/gnu-free/FreeSans.ttf \
 # Install icons (16, 32, 48, 64px)
 for i in 0 1 2 3; do
   px=$(expr ${i} \* 16 + 16)
-  mkdir -p $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/${px}x${px}/apps
+  install -d $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/${px}x${px}/apps
   convert %{name}.ico[${i}] \
     $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/${px}x${px}/apps/%{name}.png
 done
@@ -64,22 +64,13 @@ desktop-file-install \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications \
   %{SOURCE1}
 
+# Install AppData file
+install -d $RPM_BUILD_ROOT%{_datadir}/metainfo
+install -p -m 644 %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/metainfo
+appstream-util validate-relax --nonet $RPM_BUILD_ROOT/%{_datadir}/metainfo/*.appdata.xml
+
+
 %find_lang %{name}
-
-
-%post
-touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-
-
-%postun
-if [ $1 -eq 0 ] ; then
-    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-fi
-
-
-%posttrans
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files -f %{name}.lang
@@ -87,10 +78,21 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
-%doc AUTHORS ChangeLog COPYING NEWS README
+%{_datadir}/metainfo/%{name}.appdata.xml
+%doc %{_pkgdocdir}
+%exclude %{_pkgdocdir}/COPYING
+%license COPYING
 
 
 %changelog
+* Sat Mar 17 2018 Andrea Musuruane <musuruan@gmail.com> - 0.0.5-10
+- Updated URL
+- Added gcc-c++ dependency
+- Removed obsolete scriptlets
+- Added license tag
+- Added AppData file
+- Spec file clean up
+
 * Fri Mar 02 2018 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 0.0.5-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 

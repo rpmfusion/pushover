@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2018 Andrea Musuruane <musuruan@gmail.com> -->
+<component type="desktop">
+  <id>pushover.desktop</id>
+  <metadata_license>CC-BY-SA-3.0</metadata_license>
+  <project_license>GPL-3.0 and proprietary</project_license>
+  <name>Pushover</name>
+  <summary>Fun puzzle game with dominos</summary>
+  <description>
+    <p>
+    Rearrange the dominoes on the different platforms so that you can 
+    start a chain reaction that makes all dominoes topple over.
+    </p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://pushover.github.io/website/images/Screenshot2.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>https://pushover.github.io/website/images/Screenshot3.png</image>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">https://pushover.github.io/</url>
+</component>
+
