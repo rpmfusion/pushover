@@ -1,6 +1,6 @@
 Name:           pushover
 Version:        0.0.5
-Release:        26%{?dist}
+Release:        27%{?dist}
 Summary:        Fun puzzle game with dominos
 
 # Some proprietary graphics from the original game are still used
@@ -85,6 +85,9 @@ appstream-util validate-relax --nonet $RPM_BUILD_ROOT/%{_datadir}/metainfo/*.app
 
 
 %changelog
+* Sun Aug 02 2026 RPM Fusion Release Engineering <leigh123linux@rpmfusion.org> - 0.0.5-27
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_45_Mass_Rebuild
+
 * Mon Feb 02 2026 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 0.0.5-26
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_44_Mass_Rebuild
 
